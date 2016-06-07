@@ -8,7 +8,7 @@ module.exports = {
         main : './web-app/main.js',
     },
     output: {
-        path: './dist',
+        path: './dist/public',
         filename: 'script/[name].js',
     },
     devtool: devtool,

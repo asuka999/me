@@ -54,7 +54,7 @@ var app = new _koa2.default();
 //app.use(convert(publicFiles));
 //app.use('/public', convert(serve(path.join(__dirname, '..', 'vue_blog', 'dist'))));
 app.use((0, _koaConvert2.default)((0, _koaStatic2.default)(_path2.default.join(__dirname, '../dist/public'))));
-
+console.log(_path2.default.join(__dirname, '../dist/public'));
 // session
 app.keys = _config2.default.session.keys;
 app.use((0, _koaConvert2.default)((0, _koaSession2.default)(app)));
@@ -63,7 +63,7 @@ app.use((0, _koaConvert2.default)((0, _koaSession2.default)(app)));
 app.use((0, _koaConvert2.default)((0, _koaLogger2.default)()));
 
 // err catch
-app.use((function () {
+app.use(function () {
     var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(ctx, next) {
         return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
@@ -95,7 +95,7 @@ app.use((function () {
     return function (_x, _x2) {
         return ref.apply(this, arguments);
     };
-})());
+}());
 
 //before handle
 app.use((0, _koaBodyparser2.default)({
@@ -109,4 +109,3 @@ app.use(_router2.default.routes()).use(_router2.default.allowedMethods()); //wha
 var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;
 app.listen(port);
 console.log('listen on port');
-//# sourceMappingURL=main.js.map
