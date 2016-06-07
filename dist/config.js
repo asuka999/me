@@ -44,4 +44,3 @@ exports.default = {
     keys: ['some secret hurr']
   }
 };
-//# sourceMappingURL=config.js.map

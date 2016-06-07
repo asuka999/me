@@ -53,5 +53,6 @@ app
 .use(router.allowedMethods()); //what ?????
 
 
-
-app.listen(process.env.VCAP_APP_PORT || process.env.PORT ||3000);
+var port = process.env.VCAP_APP_PORT || process.env.PORT ||3000
+app.listen(port);
+console.log('listen on port')

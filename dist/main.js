@@ -106,5 +106,7 @@ app.use((0, _koaBodyparser2.default)({
 // router
 app.use(_router2.default.routes()).use(_router2.default.allowedMethods()); //what ?????
 
-app.listen(process.env.VCAP_APP_PORT || process.env.PORT || 3000);
+var port = process.env.VCAP_APP_PORT || process.env.PORT || 3000;
+app.listen(port);
+console.log('listen on port');
 //# sourceMappingURL=main.js.map
