@@ -2,6 +2,7 @@ var path = require("path");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var extractStyle = new ExtractTextPlugin('style/[name].css');
 var extractLess = new ExtractTextPlugin('style/[name].css');
+var devtool = process.env.NODE_ENV !== "production" ? 'source-map' : undefined; 
 module.exports = {
     entry: {
         main : './web-app/main.js',
@@ -10,7 +11,7 @@ module.exports = {
         path: './dist',
         filename: 'script/[name].js',
     },
-    devtool: 'source-map',
+    devtool: devtool,
     resolve: {
         extensions: ['', '.js', '.vue'],
     },

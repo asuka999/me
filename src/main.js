@@ -12,9 +12,6 @@ import bodyparser from 'koa-bodyparser'
 import router from './router'
 import config from './config'
 
-import markdown from './services/markdown'
-
-
 var app = new koa();
 
 // static

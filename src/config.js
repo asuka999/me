@@ -1,4 +1,4 @@
-console.log('config', )
+
 
 var mongo = process.env.NODE_ENV === 'production' ? JSON.parse(process.env.VCAP_SERVICES) :  {
   host: 'localhost',
