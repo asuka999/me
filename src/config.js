@@ -1,11 +1,26 @@
 
+var mongo;
 
-var mongo = process.env.NODE_ENV === 'production' ? JSON.parse(process.env.VCAP_SERVICES) :  {
-  host: 'localhost',
-  port: '27017',
-  name: 'blog',
-  uri : 'mongodb://localhost:27017/blog'
+if(process.env.NODE_ENV === 'production'){
+  mongo = {
+    host : process.env.DB_HOST,
+    port : process.env.DB_PORT, 
+    name : process.env.DB_NAME, 
+    user : process.env.DB_USER, 
+    pass : process.env.DB_PASS,
+  }
+  mongo.uri = 'mongodb://'+ mongo.user +':'+ mongo.pass +'@'+ mongo.host +':'+ mongo.port+'/' + mongo.name; 
+}else if(process.env.NODE_ENV === 'coding'){
+  mongo = JSON.parse(process.env.VCAP_SERVICES)
+}else{
+  mongo = {
+    host: 'localhost',
+    port: '27017',
+    name: 'blog',
+    uri : 'mongodb://localhost:27017/blog'
+  }
 }
+
 
 export default {
   user: {
