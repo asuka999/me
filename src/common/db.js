@@ -7,12 +7,12 @@ var conf = config.db.mongo;
 var MongoClient = mongodb.MongoClient;
 
 // Connection URL
-var url = 'mongodb://'+ conf.host +':' + conf.port + '/' + conf.name ;
+var uri = conf.uri || 'mongodb://'+ conf.host +':' + conf.port + '/' + conf.name ;
 
 
 export default {
   op : async(fn)=>{
-    var db = await MongoClient.connect(url);
+    var db = await MongoClient.connect(uri);
     return await fn(db);
   }
 }
