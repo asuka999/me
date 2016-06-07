@@ -18,7 +18,7 @@ export default {
         fd.append('token', token);
         $http({
           method: 'POST',
-          url: "http://upload.qiniu.com",
+          url: location.protocol === 'https' ? 'https://up.qbox.me' : 'http://upload.qiniu.com',
           data: fd,
           load: function(res) {
             res.status == 200 ?
