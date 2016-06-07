@@ -4,11 +4,11 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "start" : "npm run build && node dist/main.js",
-    "build": "babel src -d dist & webpack",
+    "start": "npm run postinstall && node dist/main.js",
     "dev": "babel --watch src -d dist --source-maps",
     "webdev": "webpack --watch",
     "debug": "node-debug --hidden node_modules/",
+    "postinstall": "./node_modules/.bin/babel src -d dist & ./node_modules/.bin/webpack",
     "update-normalize": "echo jaja",
     "test": "echo \"Error: no test specified\" && exit 1",
     "run": "node --harmony_object_observe --harmony_modules --harmony_function_sent --harmony_sharedarraybuffer --harmony_simd --harmony_do_expressions --harmony_iterator_close --harmony_tailcalls --harmony_object_values_entries  --harmony_object_own_property_descriptors --harmony_regexp_property src/main.js",
@@ -18,10 +18,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.9.0",
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.9.0",
     "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0",
     "babel-runtime": "^6.9.2",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -32,17 +34,13 @@
     "vue-html-loader": "^1.2.2",
     "vue-loader": "^8.5.2",
     "vue-style-loader": "^1.0.0",
-    "webpack": "^1.13.1",
-
-    "babel-cli": "^6.9.0",
-    "babel-preset-stage-0": "^6.5.0"
+    "webpack": "^1.13.1"
   },
   "dependencies": {
     "github-markdown-css": "^2.3.0",
     "marked": "^0.3.5",
     "vue": "^1.0.24",
     "vue-router": "^0.7.13",
-
     "koa": "^2.0.0",
     "koa-bodyparser": "^3.1.0",
     "koa-convert": "^1.2.0",
@@ -52,5 +50,8 @@
     "koa-static": "^2.0.0",
     "mongodb": "^2.1.21",
     "qiniu": "^6.1.11"
+  },
+  "engines": {
+    "node": ">=0.10"
   }
 }
