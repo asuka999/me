@@ -5,6 +5,7 @@ import user from '../services/user'
 
 export default {
   theme : async(ctx, nxt)=>{
+    console.log('user', user);
     var rs = await user.find({name:config.user.name});
     if(!rs) throw new Error('query err in get theme');
     if(ctx.session.user) rs.isLogin = true;

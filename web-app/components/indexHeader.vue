@@ -25,6 +25,10 @@
   @import '../less/style.less';
   header.ui {
     background-color: @theme;
+    color: #fff;
+    .tab:after{
+      background-color :#fff;
+    };
   }
 </style>
 <script>
