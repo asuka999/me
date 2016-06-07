@@ -8,7 +8,7 @@
     "dev": "babel --watch src -d dist --source-maps",
     "webdev": "webpack --watch",
     "debug": "node-debug --hidden node_modules/",
-    "postinstall": "./node_modules/.bin/webpack && ./node_modules/.bin/babel src -d dist",
+    "postinstall": "ls -al node_modules/.bin/ && ./node_modules/.bin/webpack && ./node_modules/.bin/babel src -d dist",
     "update-normalize": "echo jaja",
     "test": "echo \"Error: no test specified\" && exit 1",
     "run": "node --harmony_object_observe --harmony_modules --harmony_function_sent --harmony_sharedarraybuffer --harmony_simd --harmony_do_expressions --harmony_iterator_close --harmony_tailcalls --harmony_object_values_entries  --harmony_object_own_property_descriptors --harmony_regexp_property src/main.js",
