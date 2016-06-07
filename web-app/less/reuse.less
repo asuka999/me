@@ -1,0 +1,38 @@
+.clear() {
+    &:after {
+        content: '';
+        clear: both;
+        height: 0;
+        display: block;
+    }
+}
+.surface {
+    display: none;
+    &:before {
+        content: '';
+        position: fixed;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.24);
+    }
+    .body {
+        position: fixed;
+        z-index: 1;
+    }
+}
+.surface.ui-trans {
+    &:before, .body{
+        opacity: 0;
+        -webkit-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+    }
+    &.active {
+      &:before, .body{
+       opacity: 1;
+      }
+    }
+}

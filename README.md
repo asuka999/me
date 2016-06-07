@@ -1,0 +1,7 @@
+- dev config
+- update-normalize
+- help 
+- docs
+- test
+- 不同浏览器的支持
+- 手机适配
