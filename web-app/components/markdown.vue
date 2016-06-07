@@ -6,7 +6,7 @@
       <div class="tb post-view-date">
         <div class="tc" v-text="md.date | date"></div> 
         <div class="tc full">跟新于：<span v-text="md.updateDate | date "></span></div> 
-        <div class="tc"><span class="ui" v-link="{path:'/markdown-edit/'+md._id}">编辑</span><span class="ui" v-on:click="delete">删除</span></div>
+        <div class="tc" v-if="share$.user && share$.user.isLogin"><span class="ui" v-link="{path:'/markdown-edit/'+md._id}">编辑</span><span class="ui" v-on:click="delete">删除</span></div>
       </div>
     </div>
     <section class="content">
