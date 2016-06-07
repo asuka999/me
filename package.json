@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "start": "node dist/main.js",
+    "start": "npm run build && node dist/main.js",
     "dev": "babel --watch src -d dist --source-maps",
     "webdev": "webpack --watch",
     "debug": "node-debug --hidden node_modules/",
