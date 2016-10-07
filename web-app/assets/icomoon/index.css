@@ -1,0 +1,99 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('./icomoon.eot');
+  src:  url('./icomoon.eot#iefix') format('embedded-opentype'),
+    url('./icomoon.ttf') format('truetype'),
+    url('./icomoon.woff') format('woff'),
+    url('./icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-eye:before {
+  content: "\e000";
+}
+.icon-mail:before {
+  content: "\e002";
+}
+.icon-lock:before {
+  content: "\e007";
+}
+.icon-unlock:before {
+  content: "\e008";
+}
+.icon-img:before {
+  content: "\e010";
+}
+.icon-camera-o:before {
+  content: "\e017";
+}
+.icon-paper:before {
+  content: "\e034";
+}
+.icon-folder:before {
+  content: "\e059";
+}
+.icon-plus:before {
+  content: "\e114";
+}
+.icon-minus:before {
+  content: "\e115";
+}
+.icon-check:before {
+  content: "\e116";
+}
+.icon-cross:before {
+  content: "\e117";
+}
+.icon-heart:before {
+  content: "\f001";
+}
+.icon-heart-o:before {
+  content: "\f002";
+}
+.icon-image:before {
+  content: "\f003";
+}
+.icon-camera:before {
+  content: "\f004";
+}
+.icon-mobile:before {
+  content: "\e903";
+}
+.icon-github:before {
+  content: "\e900";
+}
+.icon-blogger:before {
+  content: "\e901";
+}
+.icon-blogger2:before {
+  content: "\e902";
+}
+.icon-down:before {
+  content: "\e904";
+}
+.icon-left:before {
+  content: "\e905";
+}
+.icon-right:before {
+  content: "\e906";
+}
+.icon-up:before {
+  content: "\e907";
+}
+

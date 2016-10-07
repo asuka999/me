@@ -1,32 +1,46 @@
 import post from '../services/post'
+import {POST_TYPES} from '../../constants'
 
 export default {
+  async post(ctx) {
+    const {type = POST_TYPES.markdown, title, content} = ctx.request.body
 
-  get: async (ctx, nxt) => {
-    var query = ctx.query;
-    var rs = query._id ? await post.get(query) : await post.query(query) 
-    ctx.body = {
-      code: 200,
-      message: 'success',
-      data: rs
+    if (type === POST_TYPES.markdown && !title) {
+      ctx.throw(400, 'markdown param err')
     }
+
+    if (type === POST_TYPES.photo && !content.length) {
+      ctx.throw(400, 'photo param err')
+    }
+
+    const rs = await post.create({type, title, content})
+    ctx.body = {rs}
   },
-  post: async(ctx, nxt) => {
-    var pt = ctx.request.body;
-    pt.type = pt.type || 'markdown'
-    if(pt.type == 'markdown' && !pt.title){
-      return ctx.throw(400, 'markdown param err');
-    }
-    if(pt.type == 'photo' && !pt.content.length) {
-      return ctx.throw(400, 'photo param err');
-    }
-    var rs = await post.create(pt);
-    ctx.body = {
-      code: 200,
-      message: 'success',
-      data: rs
-    }
+
+  async get(ctx) {
+    const {id, ...query} = ctx.query
+    query._id = id
+    const rs = query._id ? await post.get(query) : await post.query(query)
+    ctx.body = rs
   },
+
+  async delete(ctx) {
+    const {id, ...query} = ctx.request.body
+    if (!id) {
+      ctx.throw(400, 'missing id')
+    }
+    query._id = id
+    var rs = await post.delete(query)
+    if (!rs) {
+      ctx.throw(500, 'unknow error')
+    }
+    ctx.status = 204
+  },
+
+  async patch(ctx) {
+
+  },
+
   put: async (ctx, nxt) => {
     var pt = ctx.request.body;
     if (!pt._id) {
@@ -47,18 +61,5 @@ export default {
       message: 'success',
       data: tpt
     }
-  },
-  delete : async(ctx,nxt)=>{
-    var pt = ctx.request.body;
-    if(!pt._id){
-      return ctx.throw(400, 'missing id')
-    }
-    var rs = await post.delete(pt);
-    ctx.body = {
-      code : 200, 
-      message : 'success',
-      data : rs
-    }
   }
-
 }

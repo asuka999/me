@@ -1,36 +1,5 @@
 import {$http} from '../js/util'
 export default {
-  addImg(file){
-    return new Promise((resolve,reject)=>{
-      $http('/token', {
-        load: function(res) {
-          res.status == 200 ?
-          resolve(res.data.data) : 
-          rejece(res)
-        },
-        error: reject,
-      })
-    })
-    .then((token)=>{
-      return new Promise((resolve,reject)=>{
-        var fd = new FormData();
-        fd.append('file', file);
-        fd.append('token', token);
-        $http({
-          method: 'POST',
-          url: location.protocol === 'https:' ? 'https://up.qbox.me' : 'http://upload.qiniu.com',
-          data: fd,
-          load: function(res) {
-            res.status == 200 ?
-            resolve(res.data.url) : 
-            rejece(res)
-          },
-          error: reject,
-        })
-      })
-      
-    })
-  },
   get(query){
     return new Promise((resolve,reject)=>{
       $http({

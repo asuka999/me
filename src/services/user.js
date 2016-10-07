@@ -1,16 +1,18 @@
 import User from '../models/User'
 import config from '../config'
 export default {
-  find : async(user)=>{
+  find: async user => {
+    return await User.find(user, {fields: {password: 1}})
+  },
+  words: async user => {
+    const u = await User.find(user, {fields: {words: 1}})
+    return u.words
+  },
+  profile: async user => {
     return await User.find(user)
   },
-  insertImg : async(img)=>{
-    return await User.update({name:config.user.name},{$addToSet:{imgs : img }},{upsert: true});
-  },
-  deleteImg : async(img)=>{
-    return await User.update({name:config.user.name}, {$pull:{imgs:{$in:[img]}}})
-  },
-  update :async(p)=>{
-    return await User.update({name:config.user.name}, {$set:p })
+  update: async profile => {
+    return await User.update({name: config.user.name}, {$set: profile})
   }
 }
+

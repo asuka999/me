@@ -1,29 +1,6 @@
 import {$http} from '../js/util'
 
 export default{
-  theme(){
-    return new Promise((resolve,reject)=>{
-      $http('/theme', {
-        load(res){
-          res.status == 200 ? resolve(res.data.data) : reject(res);
-        },
-        error : reject 
-      })
-    })
-  },
-  login(user){
-
-    return new Promise((resolve,reject)=>{
-      $http({
-        method :'POST',
-        url: '/login',
-        data: user,
-        load(res){
-          res.status == 200 ? resolve(res.data.data) : reject(res);
-        }
-      })
-    })
-  },
 
   insertImg(file, token){
     return new Promise((resolve,reject)=>{
@@ -57,7 +34,7 @@ export default{
       })
     })
   },
-  deleteImg(img){
+  deleteImg(img) {
     return new Promise((resolve,reject)=>{
       $http({
         method :'delete',

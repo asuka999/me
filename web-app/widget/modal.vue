@@ -131,27 +131,6 @@
     return {
       active : false,
     }
-   },
-   events :{
-   'modal' : function (sel){
-        if(!this.$el.matches(sel)) return;
-        this.$el.show();
-        this.active = true; 
-        this.$dispatch("modal.state", this.active);
-      },
-      'modal.hide' : function(sel){
-        if(sel && !this.$el.matches(sel)) return;
-        this.$el.hide(this.$el);
-        this.active = false;
-      
-        this.$dispatch("modal.state", this.active);
-      },
-      'close': function(){
-        this.$el.hide(this.$el);
-        this.active = false;
-        this.$dispatch("modal.state" , this.active);
-        return true;
-      }
    }
  }
 </script>

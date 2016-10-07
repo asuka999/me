@@ -1,32 +1,57 @@
 <template>
-  <div class="login">
-    <div class="err" v-text="err"></div>
-    <div><input type="text" class="ui" v-model="u.name" placeholder="username"></div>
-    <div><input type="password" class="ui" v-model="u.password" placeholder="password"></div>
-    <span class="ui" v-on:click="login">确定</span>
-  </div>
+  <form action="javascript:;">
+    <div>
+      <ui-input
+        name="username"
+        placeholder="username"
+        @input.native="username = $event.target.value"
+      />
+    </div>
+    <div>
+      <ui-input
+        type="password"
+        name="password"
+        placeholder="password"
+        @input.native="password = $event.target.value"
+      />
+    </div>
+    <ui-button
+      type="submit"
+      :disabled="!valid"
+      @click.native="handleSubmit"
+    >
+      确定
+    </ui-button>
+  </form> 
 </template>
 
 <script>
-  import userService from '../service/user.service'
+  import UiButton from '../widget/UiButton'
+  import UiInput from '../widget/UiInput'
   export default {
-    props: ['share$'],
+    components: {
+      UiButton,
+      UiInput,
+    },
+    computed: {
+      valid() {
+        return this.password && this.username
+      }
+    },
     methods : {
-      login(){
-        userService.login(this.u)
-        .then((data)=>{
-          this.$dispatch('login', data);
-          this.$router.go({ path: '/'});
-        })
-        .catch((res)=>{
-          this.err=res.data.message +' : 密码错误';
+      handleSubmit() {
+        console.log('sadaskdhasjk')
+        const {password, username} = this
+        this.$store.dispatch('login', {
+          password,
+          username
         })
       }
     },
     data(){
       return {
-        u: {},
-        err : undefined,
+        username: '',
+        password: '',
       }
     }
   }

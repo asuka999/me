@@ -1,84 +1,56 @@
 'use strict'
-
-import config from '../config'
 import user from '../services/user'
 
+let words
+
 export default {
-  theme : async(ctx, nxt)=>{
-    console.log('user', user);
-    var rs = await user.find({name:config.user.name});
-    if(!rs) throw new Error('query err in get theme');
-    if(ctx.session.user) rs.isLogin = true;
-    delete rs.password;
-    ctx.body = {
-      code : 200, 
-      data : rs,
+  async login(ctx) {
+    const {username, password} = ctx.request.body
+    if (!password || !username) {
+      ctx.throw(400)
+    }
+    if (ctx.session.user) {
+      ctx.throw(405, 'already logined')
+    }
+    const rs = await user.find({name: username})
+    ctx.session.views = (ctx.session.views || 0) + 1
+    if (rs && password === rs.password) {
+      delete rs.password
+      ctx.session.user = {name: username}
+      ctx.body = rs
+    } else {
+      ctx.throw(401)
     }
   },
-  login : async(ctx, nxt)=>{
-    var u = ctx.request.body;
-    if(!ctx.session.user) {
-      var rs = await user.find({name:u.name});
-      if(rs && u.password==rs.password){
-          delete rs.password;
-          rs.isLogin = true; 
-          ctx.session.user = u;
-          ctx.body = {
-            code : 200, 
-            data : rs,
-          }
-      }else{
-          ctx.throw(400, 'login fail');
-      }
-    }
-    
-  },
-  logout : async (ctx, nxt)=>{
+
+  async logout(ctx) {
     ctx.session.user = null
-    ctx.body = {
-      code : 200,
-      msg : 'logout success'
-    }
+    ctx.status = 204
   },
-  profile : async(ctx, nxt)=>{
-    var p = ctx.request.body;
-    if(!p.profile1 && !p.profile2){
-      return ctx.throw(400, 'profile require');
-    }
-    
-    var tmp = {};
-    p.profile1 && (tmp.profile1 = p.profile1);
-    p.profile2 && (tmp.profile2 = p.profile2);
 
-    var rs = await user.update(tmp);
+  async word(ctx) {
+    const {val, key} = ctx.request.body
+    if (!val && !key) {
+      ctx.throw(400)
+    }
 
-    ctx.body =  {
-       code :200,
-       data : tmp,
+    if (!words) {
+      words = await user.words({name: ctx.session.user.name})
     }
+
+    const rs = []
+    val && rs.push(...val)
+    key && rs.push(...key.split(';').map(k => `${k};`))
+
+    console.log('rs', val, key, rs)
+    ctx.body = rs.map(item => words.find(({val, key}) => val === item || key === item))
   },
-  insertImg : async (ctx,nxt)=>{
-    var b = ctx.request.body;
-    if(!b || !b.img){
-      return ctx.throw(400, 'img require');
-    }
-    
-    var rs = await user.insertImg(b.img)
+
+  profile: async (ctx, nxt) => {
+    var p = ctx.request.body
+    var rs = await user.update(tmp)
     ctx.body =  {
-       code :200,
-       data : rs,
-    }
-  },
-  deleteImg :async(ctx, nxt) =>{
-      var b = ctx.request.body;
-    if(!b || !b.img){
-      return ctx.throw(400, 'img require');
-    }
-    var rs = await user.deleteImg(b.img)
-    ctx.body =  {
-       code :200,
-       data : rs,
+       data: tmp,
     }
   }
-
 }
