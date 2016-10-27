@@ -22,7 +22,7 @@
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": ">=0.10"
+    "node": ">=6.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.0",
