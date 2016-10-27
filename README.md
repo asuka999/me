@@ -1,7 +1,6 @@
-个人博客 build by koa2, mongodb , vue
+个人博客 build by koa2, mongodb, vue2
 
 - dev config
-- update-normalize
 - help 
 - docs
 - test
