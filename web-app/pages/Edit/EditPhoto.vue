@@ -71,7 +71,7 @@
 </template>
 <script>
   import UiButton from '../../widget/UiButton'
-  import Filefield from '../../widget/filefield'
+  import Filefield from '../../widget/Filefield'
 
   export default {
     props: ['onInput'],

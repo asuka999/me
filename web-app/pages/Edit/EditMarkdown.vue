@@ -62,7 +62,7 @@
   import UiButton from '../../widget/UiButton'
   import UiTextarea from '../../widget/UiTextarea'
   import RichText from '../../widget/RichText'
-  import Filefield from '../../widget/filefield'
+  import Filefield from '../../widget/Filefield'
   import '../../assets/iconfont/index.css'
 
   const fetch = store => {
