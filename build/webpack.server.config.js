@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const assets = ['normalize.css', 'github-markdown-css']
 
 const externals = Object.keys(require('../package.json').dependencies)
-  .filter(item => assets.indexOf(item) < 0)
+  .filter(item => !assets.includes(item))
 
 module.exports = Object.assign({}, config, {
   entry: {
