@@ -1,6 +1,5 @@
 const devtool = process.env.NODE_ENV !== 'production' ? 'source-map' : undefined
 
-
 module.exports = {
   devtool: devtool,
   resolve: {
