@@ -1,8 +1,8 @@
 <template>
   <div
     class="hovercard"
-    v-on:mouseenter="handleMouseEnter"
-    v-on:mouseleave="handleMouseLeave"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
   >
     <div class="hovercard-inner" ref="inner"><slot /></div>
     <popover

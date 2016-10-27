@@ -13,16 +13,7 @@ imgPolicy.returnBody = '{"name":$(fname),"hash":$(etag),"url":"' + config.qiu.do
 
 export default {
   index: async ctx => {
-    ctx.body = [{
-      img: 'http://7xpjb6.com1.z0.glb.clouddn.com/FullSizeRender%201.jpg',
-      title: 'sjahdjhsajdmbnm'
-    }, {
-      img: 'http://7xpjb6.com1.z0.glb.clouddn.com/FullSizeRender%201.jpg',
-      title: 'sjahdjhsajdmbnm'
-    }, {
-      img: 'http://7xpjb6.com1.z0.glb.clouddn.com/FullSizeRender%201.jpg',
-      title: 'sjahdjhsajdmbnm'
-    }]
+    ctx.body = (await post.query({lock: true}, {limit: 1}))[0]
   },
   token: async ctx => {
     ctx.body = {token: imgPolicy.token()}

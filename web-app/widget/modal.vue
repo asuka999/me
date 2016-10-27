@@ -1,136 +1,120 @@
 <template>
-  <div v-on:transitionend="transend" v-on:click="clickface" class="modal ui-trans ui" data-ctrl="modal">
-    <div class="body">
-      <div class="head">
-        <slot name="head"></slot>
+  <shade :shown="shown" @close="$emit('close')">
+    <component :is="tag" v-if="shown" class="modal">
+      <div v-if="$slots.head" class="modal-head">
+        <slot name="head">model-head</slot>
       </div>
-      <section>
-        <slot name="section"></slot>
+      <section class="modal-section">
+        <slot>model-section</slot>
       </section>
-      <div class="ft tb cells" v-on:click="close">
-        <slot><span class="tc ui">确定</span></slot>
+      <div class="modal-actions" @click.stop="$emit('close')">
+        <slot name="actions"><ui-button>确定</ui-button></slot>
       </div>
-    </div>
-  </div>
+    </component>
+  </shade>
 </template>
-<style lang="less">
-  @import "../less/reuse.less";
-  .modal {
-    .surface;
-    &.active .body {
-      -webkit-transform: -webkit-translate(-50%, -50%)!important;
-      -ms-transform: -ms-translate(-50%, -50%)!important;
-      -o-transform: -o-translate(-50%, -50%)!important;
-      transform: translate(-50%, -50%)!important;
+<style>
+  .shade {
+    &-enter {
+      &&-active .modal {
+        transform: translate(-50%, 0);
+      }
+      &-active .modal {
+        transform: translate(-50%, -50%);
+        transition: transform 300ms;
+      }
     }
-    .body {
-      top: 50%;
-      left: 50%;
+
+    &-leave {
+      &&-active .modal {
+        transform: translate(-50%, -50%);
+      }
+
+      &-active .modal {
+        transform: translate(-50%, 0);
+        transition: transform 300ms;
+      }
     }
   }
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    max-width: 640px;
+    border-radius: 3px;
+    overflow: hidden;
 
+    &-head {
+      font-size: 1.125em;
+      padding:  1rem 1.25rem 0.5rem;
+      font-weight: 600;
 
-
-  .modal.ui {
-    .body {
-      width: 85%;
-      border-radius: 3px;
-      overflow: hidden;
+      + .modal-section {
+        padding-top: 0.7rem;
+      }
     }
-    &.sm .body {
+
+    &-section {
+      margin-top: 1px;
+      padding: 1rem  1.25rem;
+      color: #888;
+      background-color: #fff;
+    }
+
+    &-actions {
+      display: flex;
+      margin-top: 1px;
+      
+      >* {
+        flex: 1;
+        border-radius: 0;
+        border: 0;
+        background: #fff;
+
+        &:not(:first-child) {
+          margin-left: 1px;
+        }
+      }
+    }
+
+    &-small {
       max-width: 300px;
     }
-    &.lg .body {
+
+    &-large {
       width: 85%;
       max-width: 900px;
     }
+
     @media (min-width: 768px) {
       .body {
         width: 35%;
       }
     }
-    .head {
-      font-size: 1.125em;
-      padding:  1rem 1.25rem 0.5rem;
-      font-weight: 800;
-      background-color: #fff;   
-    }
-    section {
-      padding:0  1.25rem 1rem;
-      color: #888;
-      background-color: #fff;
-      background-clip: padding-box;
-    }
-    h5+section {
-      padding-top: 0.7rem;
-    }
-    .ft {
-      >* {
-        background-color: #fff;
-        background-clip: padding-box;
-        border-radius: 0;
-
-        border-width:0px;
-        border-top: 1px solid transparent;
-        &:not(:first-child) {
-          border-left: 1px solid transparent;
-        }
-      }
-
-    }
   }
-  .modal.ui-trans {
-    .surface.ui-trans;
-    .body {
-      -webkit-transform: -webkit-translate(-50%, 0);
-      -ms-transform: -ms-translate(-50%, 0);
-      -o-transform: -o-translate(-50%, 0);
-      transform: translate(-50%, 0);
-    }
-  }
+
 </style>
 <script>
-  let surfaceProto = {
-    show: function() {
-      this.style.display = "block";
-      this.offsetWidth;
-      this.classList.add('active');
+  import Shade from './Shade'
+  import UiButton from './UiButton'
+  const VALID_TAGS = ['form', 'div']
 
-    },
-    hide: function(e) {
-      this.classList.remove('active');
-    },
-    _onTransEnd: function(e) {
-      if (!this.classList.contains('active')) {
-        this.style.display = "none";
+  export default {
+    props: {
+      shown: {
+        type: Boolean
+      },
+      tag: {
+        type: String,
+        validator: val => VALID_TAGS.includes(val),
+        default: 'div'
       }
     },
-    _onClickFace: function(e) {
-      if (e.target === this) {
-        this.classList.remove('active');
-      }
+    components: {
+      Shade,
+      UiButton,
     }
   }
-  export default {
-    ready: function() {
-      this.$el.show = surfaceProto.show;
-      this.$el.hide = surfaceProto.hide;
-    },
-    methods: {
-      close: function(e) {
-        this.$el.hide();
-      },
-      transend : function(e){
-        surfaceProto._onTransEnd.call(e.currentTarget, e);
-      },
-      clickface : function(e){
-       surfaceProto._onClickFace.call(e.currentTarget, e);
-     }
-   },
-   data(){
-    return {
-      active : false,
-    }
-   }
- }
 </script>

@@ -17,10 +17,17 @@
 <style>
   .popover {
     position: absolute;
+    
+    &-bottom {
+      top: 100%;
+    }
+
+    &-top {
+      bottom: 100%;
+    }
 
     &-leave {
       opacity: 1;
-      transform: translateY(0);
 
       &-active {
         opacity: 0;
@@ -28,27 +35,31 @@
       }
     }
 
-    &-bottom {
-      top: 100%;
-      transform: translateY(30%);
-    }
-
-    &-top {
-      bottom: 100%;
-      transform: translateY(-30%);
-    }
-
     &-enter {
       opacity: 0;
-
+    
       &-active {
         opacity: 1;
-        transform: translateY(0);
         transition: transform .3s, opacity .3s
       }
     }
-  }
+  
+    &-bottom&-leave, &-top&-leave {
+      transform: translateY(0);
+    } 
 
+    &-bottom&-enter, &-bottom&-leave-active {
+      transform: translateY(-30%);
+    }
+
+    &-top&-enter, &-top&-leave-active {
+      transform: translateY(30%);
+    }
+
+    &-bottom&-enter-active,  &-top&-enter-active {
+      transform: translateY(0);
+    }
+  }
 
 </style>
 <script>
@@ -67,6 +78,7 @@
         const {innerHeight} = window
         const centerX = left + width / 2
         const {offsetWidth, offsetHeight}= el
+
         const mayPoint = {
           bottom: top + height + offsetHeight,
           left: centerX - offsetWidth / 2
@@ -76,7 +88,6 @@
         el.style.left = (width - offsetWidth) / 2 - (mayPoint.left < 0 ? mayPoint.left : 0)
         el.offsetWidth
         el.classList.add(`${CLASS}-enter-active`)
-        el.classList.remove(`${CLASS}-${this.from}`)
         setTimeout(done, TIMEOUT)
       },
       afterEnter(el) {

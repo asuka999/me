@@ -7,5 +7,13 @@ const MongoClient = mongodb.MongoClient
 // Connection URL
 const uri = conf.uri || `mongodb://${conf.host}:${conf.port}/${conf.name}`
 
-console.log(uri)
-export default MongoClient.connect(uri)
+console.log('uri', uri)
+function db() {
+  let cache
+  return async function(collection) {
+    cache = cache || await MongoClient.connect(uri)
+    return cache.collection(collection)
+  }
+}
+
+export default db()

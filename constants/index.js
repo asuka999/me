@@ -4,3 +4,4 @@ exports.POST_TYPES = {
   markdown: 'markdown'
 }
 
+exports.LOCK_REG = /(&#xe6\w{2})/g

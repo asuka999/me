@@ -20,13 +20,13 @@
     <div class="slider-ctrls">
       <ui-button
         class="slider-ctrl-left"
-        @click.native="go('left')"
+        @click.stop.native="go('left')"
       >
         <i class="icon-left" />
       </ui-button>
       <ui-button
         class="slider-ctrl-right"
-        @click.native="go('right')"
+        @click.stop.native="go('right')"
       >
         <i class="icon-right" />
       </ui-button>
@@ -34,7 +34,7 @@
         <li
           v-for="(item, index) of items"
           :class="{'is-active': current===index}"
-          @click="go(index)"
+          @click.stop="go(index)"
         />
       </ul>
     </div>
@@ -102,8 +102,14 @@
     min-height: 10rem;
 
     &-inner {
+
       &, img {
         width:100%;
+        height: 100%;
+      }
+
+      img {
+        object-fit: cover;
       }
     }
 
@@ -155,7 +161,6 @@
       }
     }
   }
-
 </style>
 <script>
   import UiButton from './UiButton'

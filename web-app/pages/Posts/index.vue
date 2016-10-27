@@ -3,7 +3,7 @@
     <posts-header />
     <div class="posts-body">
       <post-list :items="items" />
-    </div> 
+    </div>
   </div>
 </template>
 <style>

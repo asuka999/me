@@ -1,9 +1,16 @@
 import Vue from 'vue'
-
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import Router from 'vue-router'
+import Vuex from 'vuex'
 import {sync} from 'vuex-router-sync'
+import App from './App.vue'
+import routerOpts from './router'
+import storeOpts from './store'
+
+Vue.use(Router)
+const router = new Router(routerOpts)
+
+Vue.use(Vuex)
+const store = new Vuex.Store(storeOpts)
 
 Vue.config.debug = true
 Vue.config.devtools = true

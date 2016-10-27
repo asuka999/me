@@ -1,6 +1,7 @@
 <template>
   <input
     class="textfield"
+    :value="value"
     :name="name"
     :type="type"
     :placeholder="placeholder" />
@@ -20,7 +21,6 @@
       border:0;
       outline: 0;
     }
-    
   }
 
 </style>
@@ -31,9 +31,7 @@
     props: {
       type: {
         type: String,
-        validator: (val) => {
-          return TYPES.includes(val)
-        },
+        validator: val => TYPES.includes(val),
         default: 'text'
       },
       placeholder: {

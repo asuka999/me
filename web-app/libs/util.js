@@ -102,11 +102,15 @@ function fetch(url, opts = {}) {
   return isomorphicFetch(
     resolveUrl(url),
     // eslint-disable-next-line no-undef
-    opts.body && typeof FormData !== 'undefined' && FormData.isPrototypeOf(opts.body) ? {
+    opts.body && typeof FormData !== 'undefined' && FormData.prototype.isPrototypeOf(opts.body) ? {
+      headers: fetch.context,
       credentials,
       ...opts
     } : {
-      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      headers: {
+        ...(fetch.context || {}),
+        'Content-Type': 'application/json; charset=utf-8'
+      },
       credentials,
       ...opts,
       body: JSON.stringify(opts.body)
@@ -128,6 +132,7 @@ function fetch(url, opts = {}) {
     throw err
   })
 }
+fetch.context = {}
 
 function $extend (t = {}, src) {
   for (const key in src) {
@@ -155,8 +160,23 @@ const day = hour * 24
 const month = day * 30
 const year = month * 12
 
-function time(val) {
-  var d = new Date() - new Date(val)
+function prependZero(val, isPrepend) {
+  return `${val < 10 && isPrepend ? 0 : ''}${val}`
+}
+
+function time(val, format) {
+  const date = new Date(val)
+  if (format) {
+    return format
+    .replace(/(yy)?yy/g, (_, $1) => String(date.getFullYear()).slice($1 ? 0 : 2, 4))
+    .replace(/(M)?M/g, (_, $1) => prependZero(date.getMonth() + 1, $1))
+    .replace(/(d)?d/g, (_, $1) => prependZero(date.getDate(), $1))
+    .replace(/(H)?H/g, (_, $1) => prependZero(date.getHours(), $1))
+    .replace(/(m)?m/g, (_, $1) => prependZero(date.getMinutes(), $1))
+    .replace(/(s)?s/g, (_, $1) => prependZero(date.getSeconds(), $1))
+  }
+
+  var d = new Date() - date
   if (d > year) {
     return d.toLocaleDateString()
   } else if (d > month) {
@@ -169,4 +189,5 @@ function time(val) {
     return Math.ceil(d / min) + '分钟前'
   }
 }
+
 export {$http, $extend, rand, fetch, time}

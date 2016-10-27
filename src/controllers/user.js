@@ -1,8 +1,6 @@
 'use strict'
 import user from '../services/user'
 
-let words
-
 export default {
   async login(ctx) {
     const {username, password} = ctx.request.body
@@ -28,22 +26,8 @@ export default {
     ctx.status = 204
   },
 
-  async word(ctx) {
-    const {val, key} = ctx.request.body
-    if (!val && !key) {
-      ctx.throw(400)
-    }
-
-    if (!words) {
-      words = await user.words({name: ctx.session.user.name})
-    }
-
-    const rs = []
-    val && rs.push(...val)
-    key && rs.push(...key.split(';').map(k => `${k};`))
-
-    console.log('rs', val, key, rs)
-    ctx.body = rs.map(item => words.find(({val, key}) => val === item || key === item))
+  async words(ctx) {
+    ctx.body = await user.words({name: ctx.session.user.name})
   },
 
   profile: async (ctx, nxt) => {

@@ -1,0 +1,11 @@
+{
+  "extends": "vue",
+  "parser": "babel-eslint",
+  "rules": {
+    "object-curly-spacing": [2, "never"],
+    "jsx-quotes": [2, "prefer-double"],
+    "new-parens": 0,
+    "space-before-function-paren": 0,
+    "operator-linebreak": 0,
+  }
+}

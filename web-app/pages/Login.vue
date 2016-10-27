@@ -40,7 +40,6 @@
     },
     methods : {
       handleSubmit() {
-        console.log('sadaskdhasjk')
         const {password, username} = this
         this.$store.dispatch('login', {
           password,

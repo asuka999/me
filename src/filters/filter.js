@@ -1,5 +1,5 @@
 export default {
-  auth: async (ctx, nxt) => {
+  async auth(ctx, nxt) {
     if (!ctx.session.user) {
       ctx.throw(401)
     } else await nxt()

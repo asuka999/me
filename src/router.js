@@ -8,16 +8,16 @@ import filter from './filters/filter'
 var router = koaRouter()
 
 router
+  .get('/index', index.index)
   .post('/login', user.login)
   .get('/logout', user.logout)
   .get('/token', filter.auth, index.token)
-  .get('/posts', post.get)
-  .delete('/posts', filter.auth, post.delete)
-  .post('/post', filter.auth, post.post)
-  .post('/words', filter.auth, user.word)
-
+  .get('/post', post.get)
+  .delete('/post', filter.auth, post.delete)
   .put('/post', filter.auth, post.put)
-  .get('/index', index.index)
+  .post('/post', filter.auth, post.post)
+  .get('/words', filter.auth, user.words)
+
   .put('/user/profile', filter.auth, user.profile)
 
 export default router

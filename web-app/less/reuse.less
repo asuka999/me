@@ -1,39 +1,59 @@
-.clear() {
-  &:after {
-    content: '';
-    clear: both;
-    height: 0;
-    display: block;
+header.ui{
+  height : @ui-md - @px;
+  border-bottom:1px solid transparent;
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
   }
 }
 
-.surface {
-    display: none;
-    &:before {
-        content: '';
-        position: fixed;
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background: rgba(0, 0, 0, 0.24);
-    }
-    .body {
-        position: fixed;
-        z-index: 1;
+.tabs {
+    .tab {
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            background-color: @theme;
+            height: 2*@px;
+            width: 100%;
+            left: 0;
+            bottom: 0;
+            opacity: 0;
+            -webkit-transform: translate(0, 100%);
+            -ms-transform: translate(0, 100%);
+            -o-transform: translate(0, 100%);
+            transform: translate(0, 100%);
+            -webkit-transition: all .3s ease;
+            -o-transition: all .3s ease;
+            transition: all .3s ease;
+        }
+        &:hover:after,
+        &.active:after {
+            opacity: 1;
+            -webkit-transform: translate(0, 0);
+            -ms-transform: translate(0, 0);
+            -o-transform: translate(0, 0);
+            transform: translate(0, 0);
+        }
     }
 }
-.surface.ui-trans {
-    &:before, .body{
-        opacity: 0;
-        -webkit-transition: all .3s ease-in-out;
-        -o-transition: all .3s ease-in-out;
-        transition: all .3s ease-in-out;
-    }
-    &.active {
-      &:before, .body{
-       opacity: 1;
-      }
-    }
+
+.cell {
+  padding-left: 0.9375rem;
+
+  &-inner {
+    padding: 0.625rem 0.9375rem;
+    padding-left: 0;
+    border-top: 1px solid @border;
+    border-bottom: 1px solid @border;
+  }
+  
+  &:not(:first-child) .cell-inner {
+    border-top-color: transparent;
+  }
 }

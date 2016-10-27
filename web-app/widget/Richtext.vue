@@ -5,25 +5,34 @@
   }
 </style>
 <template>
-  <div class="richtext" :class="{'markdown-body': this.marked}" v-html="html">
-  </div>
+  <component
+    :is="tag"
+    class="richtext"
+    :class="{'markdown-body': this.marked}"
+    v-html="html"
+  >
+  </component>
 </template>
 <script>
   import marked from 'marked'
   import 'github-markdown-css'
   export default {
     props: {
-      content: {
-        type: String
+      val: {
+        type: String,
       },
       marked: {
         type: Boolean,
         default: false
+      },
+      tag: {
+        type: String,
+        default: 'span',
       }
     },
     computed: {
       html() {
-        return this.marked ? marked(this.content) : this.content
+        return this.marked ? marked(this.val || '') : this.val
       }
     }
   }

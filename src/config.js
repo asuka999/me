@@ -1,18 +1,14 @@
 const mongo = {
-  host: process.env.DB_HOST || 'ds025459.mlab.com',
-  port: process.env.DB_PORT || '25459',
-  name: process.env.DB_NAME || 'blog',
-  user: process.env.DB_USER || 'asuka999',
-  pass: process.env.DB_PASS || '1901104289s'
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  name: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  pass: process.env.DB_PASS
 }
 
 mongo.uri = `mongodb://${mongo.user}:${mongo.pass}@${mongo.host}:${mongo.port}/${mongo.name}`
 
 export default {
-  user: {
-    name: 'asuka',
-    password: '123456'
-  },
   db: {
     mongo
   },

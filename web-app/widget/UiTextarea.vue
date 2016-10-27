@@ -2,6 +2,7 @@
   <textarea
     class="textfield"
     :placeholder="placeholder"
+    :value="value"
   />
 </template>
 <style>

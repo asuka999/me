@@ -41,9 +41,7 @@
     props: {
       type: {
         type: String,
-        validator: (val) => {
-          return validTypes.includes(val)
-        },
+        validator: (val) => validTypes.includes(val),
         default: 'button'
       },
       disabled: {

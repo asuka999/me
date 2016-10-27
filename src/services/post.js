@@ -1,22 +1,19 @@
 import Post from '../models/Post'
-import mongo from 'mongodb'
 
 export default {
   async get(query) {
-    var arr = await Post.find({_id: new mongo.ObjectID(query._id)})
-    return arr[0]
+    var arr = await Post.find(query)
+    return arr && arr[0]
   },
 
-  async query(query) {
-    //  var query = { sort : .., limit}
-    const opt = {
-      sort: query.sort || {updateDate: 1},
-      limit: query.limit || 20,
-      skip: query.offset || 0
+  async query(query = {}, opt = {}) {
+    opt = {
+      sort: opt.sort || {updateDate: -1},
+      limit: opt.limit || 20,
+      skip: opt.offset || 0
     }
-    // const obj = query.type ? {type: query.type} : {}
-    const obj = {type: query.type}
-    return await Post.find(obj, opt)
+    query.lock = query.lock || false
+    return await Post.find(query, opt)
   },
 
   async create(post) {
@@ -28,9 +25,8 @@ export default {
     return await Post.delete(post)
   },
 
-  update : async (fpt, pt)=>{
-    pt.updateDate = new Date;
-    return await Post.update({_id : new mongo.ObjectID(fpt._id)}, {$set : pt});
-  },
-
+  async update(query, $set) {
+    $set.updateDate = new Date
+    return await Post.update(query, {$set})
+  }
 }

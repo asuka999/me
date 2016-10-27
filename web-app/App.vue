@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <router-view class="view"></router-view>
+    <router-view class="view" />
+    <ui-footer />
   </div>
 </template>
 <style>
@@ -57,6 +58,7 @@
   [disabled]{
     opacity: .5;
   }
+
   h1, h2, h3, h4, h5, h6 {
     margin: 0;
   }
@@ -64,6 +66,11 @@
 </style>
 <script>
   import 'normalize.css'
-  import '../assets/icomoon/index.css'
-  export default {}
+  import './assets/icomoon/index.css'
+  import UiFooter from './components/UiFooter'
+  export default {
+    components: {
+      UiFooter,
+    }
+  }
 </script>

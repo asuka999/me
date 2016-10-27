@@ -1,29 +1,27 @@
-import dbPromise from '../common/db'
+import collection from '../libs/db'
 
-// private
-let col
-dbPromise.then(db => { col = db.collection('user') })
-
+const COLLECTION_NAME = 'user'
 // export
 export default {
-  find: (query, opt) => {
+  async find (query, opt) {
     opt.fields = opt.fields || {
       password: 0,
       words: 0
     }
+    const col = await collection(COLLECTION_NAME)
     return col.findOne(query, opt)
-  },
-  update: (fmd, md, opt) => {
-    return col.findOneAndUpdate(fmd, md, opt)
-    .then((rs) => {
-      if (rs.ok !== 1) {
-        const err = new Error('no err but update fail')
-        err.detail = rs
-        throw err
-      }
-      return rs.value
-    })
   }
+  // update: async (fmd, md, opt) => {
+  //   return col.findOneAndUpdate(fmd, md, opt)
+  //   .then((rs) => {
+  //     if (rs.ok !== 1) {
+  //       const err = new Error('no err but update fail')
+  //       err.detail = rs
+  //       throw err
+  //     }
+  //     return rs.value
+  //   })
+  // }
 }
 
 // title, date, updateDate, content

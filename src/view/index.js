@@ -39,7 +39,11 @@ const renderer = createBundleRenderer(bundle, {
 const index = async ctx => {
   ctx.type = 'text/html; charset=utf-8'
   ctx.set('Connection', 'keep-alive')
-  const context = {url: ctx.req.url}
+  const context = {
+    url: ctx.req.url,
+    headers: ctx.req.headers,
+    currentUser: ctx.session.user
+  }
   const body = ctx.body = new PassThrough
   body.write(html[0])
   const renderStream = renderer.renderToStream(context)
