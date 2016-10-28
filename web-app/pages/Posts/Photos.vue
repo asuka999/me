@@ -43,7 +43,7 @@
   }
 </style>
 <script>
-  import Slider from '../../widget/Slider'
+  import Slider from '../../widget/UiSlider'
   export default {
     props: {
       items: {
