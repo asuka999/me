@@ -12,7 +12,7 @@
   }
 </style>
 <script>
-  import RichText from './RichText'
+  import RichText from './Richtext'
   import UiButton from './UiButton'
 
   const TAG_REG = /<\/?(?!img)[^\/|>]+\/?>/g

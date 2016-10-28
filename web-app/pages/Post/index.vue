@@ -63,7 +63,7 @@
 
 <script>
   import {time} from '../../libs/util'
-  import RichText from '../../widget/RichText'
+  import RichText from '../../widget/Richtext'
   import UiButton from '../../widget/UiButton'
   import disqus from '../../libs/disqus'
 
