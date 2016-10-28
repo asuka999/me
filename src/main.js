@@ -49,6 +49,6 @@ app
 
 app.use(view)
 
-const port = process.env.PORT || 3000
+const port = 3000
 app.listen(port)
 console.log(`listen on port: ${port}`)
