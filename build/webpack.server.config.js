@@ -7,7 +7,7 @@ const externals = Object.keys(require('../package.json').dependencies)
 
 const {
   NODE_ENV = 'development',
-  ORIGIN = 'http://127.0.0.1:3000'
+  PORT = '3000'
 } = process.env
 module.exports = Object.assign({}, config, {
   entry: {
@@ -34,7 +34,7 @@ module.exports = Object.assign({}, config, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': `"${NODE_ENV}"`,
       'process.env.VUE_ENV': '"server"',
-      'process.env.ORIGIN': `"${ORIGIN}"`
+      'process.env.ORIGIN': `"http://127.0.0.1:${PORT}"`
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
