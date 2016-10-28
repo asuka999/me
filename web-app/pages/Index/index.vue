@@ -60,7 +60,7 @@
   }
 </style>
 <script>
-  import RichText from '../../widget/Richtext.vue'
+  import RichText from '../../widget/RichText.vue'
   import UiButton from '../../widget/UiButton.vue'
   import Modal from '../../widget/UiModal'
   import {time} from '../../libs/util'

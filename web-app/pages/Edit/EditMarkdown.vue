@@ -61,7 +61,7 @@
 <script>
   import UiButton from '../../widget/UiButton.vue'
   import UiTextarea from '../../widget/UiTextarea.vue'
-  import RichText from '../../widget/Richtext.vue'
+  import RichText from '../../widget/RichText.vue'
   import Filefield from '../../widget/Filefield.vue'
   import '../../assets/iconfont/index.css'
 
