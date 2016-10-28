@@ -9,7 +9,7 @@ module.exports = Object.assign({}, config, {
     client: './web-app/client-entry.js'
   },
   resolve: Object.assign({}, config.resolve, {
-    packageAlias: 'browser'
+    aliasFields: ['browser']
   }),
   output: {
     path: './dist/public',
