@@ -8,9 +8,6 @@ module.exports = Object.assign({}, config, {
   entry: {
     client: './web-app/client-entry.js'
   },
-  resolve: Object.assign({}, config.resolve, {
-    aliasFields: ['browser']
-  }),
   output: {
     path: './dist/public',
     filename: 'script/[name].js',
