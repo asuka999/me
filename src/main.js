@@ -49,6 +49,6 @@ app
 
 app.use(view)
 
-const port = 3000
+const port = process.env.PORT || process.env.NODE_ENV !== 'production' && 3000
 app.listen(port)
 console.log(`listen on port: ${port}`)
