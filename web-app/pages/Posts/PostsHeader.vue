@@ -12,7 +12,7 @@
   }
 </style>
 <script>
-  import Slider from '../../widget/UiSlider'
+  import Slider from '../../widget/Slider'
   export default {
     components: {
       Slider

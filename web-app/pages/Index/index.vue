@@ -62,7 +62,7 @@
 <script>
   import RichText from '../../widget/RichText.vue'
   import UiButton from '../../widget/UiButton.vue'
-  import Modal from '../../widget/UiModal'
+  import Modal from '../../widget/Modal'
   import {time} from '../../libs/util'
   import '../../assets/iconfont/index.css'
 
