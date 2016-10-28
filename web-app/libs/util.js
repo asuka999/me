@@ -117,12 +117,13 @@ function fetch(url, opts = {}) {
     }
   )
   .then(res => {
+    const contentType = res.headers.get('content-type')
     if (res.status > 300) {
       const err = new Error('request fail')
       err.message = {response: res}
       throw err
     }
-    if (res.headers.get('content-type').indexOf('application/json') >= 0) {
+    if (contentType && contentType.indexOf('application/json') >= 0) {
       return res.json().then(json => camelizeKeys(json))
     }
     return res.text()
