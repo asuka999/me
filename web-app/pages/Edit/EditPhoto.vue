@@ -70,8 +70,8 @@
   </div>
 </template>
 <script>
-  import UiButton from '../../widget/UiButton'
-  import Filefield from '../../widget/Filefield'
+  import UiButton from '../../widget/UiButton.vue'
+  import Filefield from '../../widget/Filefield.vue'
 
   export default {
     props: ['onInput'],

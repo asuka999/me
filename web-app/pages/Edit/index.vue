@@ -46,9 +46,9 @@
   </form>
 </template>
 <script>
-  import UiButton from '../../widget/UiButton'
-  import UiInput from '../../widget/UiInput'
-  import EditMarkdown from './EditMarkdown'
+  import UiButton from '../../widget/UiButton.vue'
+  import UiInput from '../../widget/UiInput.vue'
+  import EditMarkdown from './EditMarkdown.vue'
   import EditPhoto from './EditPhoto'
   import {LOCK_REG} from '../../../constants'
 

@@ -59,10 +59,10 @@
   </div>
 </template>
 <script>
-  import UiButton from '../../widget/UiButton'
-  import UiTextarea from '../../widget/UiTextarea'
-  import RichText from '../../widget/RichText'
-  import Filefield from '../../widget/Filefield'
+  import UiButton from '../../widget/UiButton.vue'
+  import UiTextarea from '../../widget/UiTextarea.vue'
+  import RichText from '../../widget/RichText.vue'
+  import Filefield from '../../widget/Filefield.vue'
   import '../../assets/iconfont/index.css'
 
   const fetch = store => {
